@@ -1,0 +1,46 @@
+= Kindle Flash Card Converter
+
+Convert kindle flash cards to a csv file suitable for anki import.
+
+It should work with all recent Kindles with an integrated flash
+card app.  I tested it with a Kindle Paperwhite 2015.
+
+== Usage
+
+----
+./kindle-flashcard-converter.sh /media/USER/Kindle/system/vocabulary/vocab.db
+----
+The output will be something like this:
+----
+"しかし私は父や母の手前、あんな{{c1::野鄙}}な人を集めて騒ぐのは止せともいいかねた。","しかし 私[わたくし]は 父[ちち]や 母[はは]の 手前[てまえ]、あんな 野[の]鄙 な 人[じん]を 集[あつ]めて 騒[さわ]ぐのは 止[よ]せともいいかねた。","こころ"
+"私は東京へ来て{{c1::高等学校}}へはいりました。","私[わたくし]は 東京[とうきょう]へ 来[き]て 高等[こうとう] 学校[がっこう]へはいりました。","こころ"
+----
+
+The order of the fields is
+
+1. The expression (result of cloze deletion).
+
+2. The reading of the expression.  It is likely to contain mistakes,
+   just like all auto-generated readings.
+
+3. The book title where this expression was found.  Suggested use in
+   anki is a tag.
+
+4. (Optional) A dictionary lookup of the word.
+
+=== Dictionary Lookups
+
+If you have "eb" from https://github.com/Christoph-D/Tools in your
+PATH and if you provide a dictionary as the second parameter, then the
+script automatically adds Japanese dictionary lookups to the csv file.
+
+Example output with dictionary lookups:
+
+----
+"しかし私は父や母の手前、あんな{{c1::野鄙}}な人を集めて騒ぐのは止せともいいかねた。","しかし 私[わたくし]は 父[ちち]や 母[はは]の 手前[てまえ]、あんな 野[の]鄙 な 人[じん]を 集[あつ]めて 騒[さわ]ぐのは 止[よ]せともいいかねた。","こころ","下品で洗練された感じのないこと。田舎びていること。また，そうした人やさま。「―な言葉を吐く」「―な音楽」"
+"私は東京へ来て{{c1::高等学校}}へはいりました。","私[わたくし]は 東京[とうきょう]へ 来[き]て 高等[こうとう] 学校[がっこう]へはいりました。","こころ","（１）中学校教育の基礎の上に，高等普通教育および専門教育を行う学校。1947年（昭和22），学制改革により発足。全日制（三年）の課程のほか，定時制・通信制（三年以上）の課程がある。高校。<br>（２）旧制で，中学校四年修了者および同等以上の学力のある男子に高等普通教育を施した学校。修業年限は三年。1894年（明治27）高等中学校を改組して第一高等学校以下五校を発足させ，順次全国の主要都市に置いた。帝国大学の予科の役割を果たし，戦後の学制改革で新制大学に吸収された。旧制高校。"
+----
+
+== TODO
+
+- If the same sentence is linked to more than one word, perform cloze deletion only once.
