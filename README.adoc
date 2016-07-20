@@ -1,9 +1,10 @@
 = Kindle Flash Card Converter
 
-Convert kindle flash cards to a csv file suitable for anki import.
+Import Kindle flash cards into http://ankisrs.net/[anki] by converting
+them to a csv file.
 
-It should work with all recent Kindles with an integrated flash
-card app.  I tested it with a Kindle Paperwhite 2015.
+This should work with all recent Kindles.  I tested it with a Kindle
+Paperwhite 2015.
 
 == Usage
 
